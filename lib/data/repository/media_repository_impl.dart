@@ -1,6 +1,6 @@
 import 'package:music_player/data/model/media_response.dart';
-import 'package:music_player/data/remote/api_manager.dart';
 import 'package:music_player/data/repository/media_repository.dart';
+import 'package:music_player/data/source/media_data_source_impl.dart';
 
 class MediaRepositoryImpl implements MediaRepository {
   final MediaDataSourceImpl mediaDataSourceImpl;
@@ -19,22 +19,4 @@ class MediaRepositoryImpl implements MediaRepository {
 }
 
 
-abstract class MediaDataSource {
-  Future<MediaResponse> getMedia({required String media, required String term,});
-}
 
-class MediaDataSourceImpl implements MediaDataSource {
-
-  @override
-  Future<MediaResponse> getMedia({required String media, required String term}) async {
-    var authority = 'itunes.apple.com';
-    var path = '/search';
-    var queryParams = {
-      'term': term,
-      'media': media
-    };
-    var response = await ApiManager.getMedia(authority, path, queryParams);
-    return MediaResponse.fromJson(response);
-  }
-
-}
