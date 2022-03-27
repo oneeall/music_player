@@ -17,12 +17,8 @@ class AppError {
   late AppErrorType type;
 
   AppError(Object? error) {
-    if (error is HttpException) {
-      
-    } else {
-      debugPrint('AppError(UnKnown): $error');
-      type = AppErrorType.unknown;
-      message = 'AppError: $error';
-    }
+    debugPrint('AppError : $error');
+    type = AppErrorType.unknown;
+    message = 'AppError : $error';
   }
 }
