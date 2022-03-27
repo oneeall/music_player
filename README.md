@@ -14,8 +14,11 @@ Name: Nexus_5_10 CPU/ABI: Google Play Intel Atom (x86) [Google Play] (API level 
 ### Supported features
 
 feature apss :
-    - search media
-    - play & stop media
+    - search media music
+    - play & stop media music
+
+architecture & state management using mvvm + provider using inherited widget 
+
 
 ### Requirements to build the app
 
