@@ -1,19 +1,26 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class ApiManager {
+  static final ApiManager _apiManager = ApiManager._internal();
 
-  static const ApiManager _apiManager = ApiManager._internal();
+  ApiManager._internal();
 
-  const ApiManager._internal();
-
-  factory ApiManager() {
+  factory ApiManager({http.Client? mockClient}) {
+    _apiManager.mockClient = mockClient;
     return _apiManager;
   }
 
-  static Future<dynamic> getMedia(String authority, String path,
+  static ApiManager get instance => _apiManager;
+
+  http.Client? mockClient = http.Client();
+
+  http.Client get client => mockClient ?? http.Client();
+
+  Future<dynamic> getMedia(String authority, String path,
       Map<String, dynamic>? queryParams) async {
 
     final uri = Uri.https(authority, path, queryParams);
@@ -24,7 +31,7 @@ class ApiManager {
     dynamic responseJson;
 
     try {
-      final response = await http.get(uri);
+      final response = await client.get(uri);
 
       responseJson = _response(response);
     } on SocketException {
@@ -32,7 +39,6 @@ class ApiManager {
     }
     return responseJson;
   }
-
 
   static dynamic _response(http.Response response) {
     switch (response.statusCode) {
@@ -48,7 +54,6 @@ class ApiManager {
     }
   }
 }
-
 
 class CustomException implements Exception {
   final String? _message;

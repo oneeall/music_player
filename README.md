@@ -19,6 +19,10 @@ feature apss :
 
 architecture & state management using mvvm + provider using inherited widget 
 
+feature test :
+    - widget testing (with mock http)
+    - integration testing (without mock http)
+
 
 ### Requirements to build the app
 

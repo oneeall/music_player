@@ -18,10 +18,9 @@ class MediaProvider extends ChangeNotifier
     MediaResponse? response;
     try {
       response = await _mediaRepositoryImpl.obtainMusic(term);
+      showResultState(data: response);
     } catch (e) {
       showErrorState(error: AppError(e), data: response);
-    } finally {
-      showResultState(data: response);
     }
   }
 }
