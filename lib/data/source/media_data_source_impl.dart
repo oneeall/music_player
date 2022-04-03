@@ -13,7 +13,8 @@ class MediaDataSourceImpl implements MediaDataSource {
       'term': term,
       'media': media
     };
-    var response = await ApiManager.getMedia(authority, path, queryParams);
+
+    var response = await ApiManager.instance.getMedia(authority, path, queryParams);
     return MediaResponse.fromJson(response);
   }
 

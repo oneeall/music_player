@@ -55,7 +55,7 @@ class MediaBuilder extends StatelessWidget {
           whenError: (error, data) {
             return Center(
               child: Text(
-                error.toString(),
+                error?.message ?? 'Something went wrong!',
               ),
             );
           },
